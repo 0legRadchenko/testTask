@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'spider.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'mydb',
-        'USER': 'postgres',
-        'PASSWORD': '415263',
+        'NAME': 'dockerdb2',
+        'USER': 'docker2',
+        'PASSWORD': 'docker2',
         'HOST': 'db',
         'PORT': '5432'
     }
