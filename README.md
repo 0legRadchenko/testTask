@@ -24,9 +24,15 @@ docker exec -it spider_group_web_1 python manage.py createsuperuser
 * docker exec -it spider_group_web_1 python manage.py test
 ## Инструкция по эксплуатации (базовое описание - подробности смотреть в swagger)
 * Для общего представления о сервисе внедрен swagger: http://127.0.0.1:8000/swagger/
+* Для большинства запросов требуется авторизация
+1) либо базовая: логин пароль {'username': 'ИМЯ', 'password': 'ПАРОЛЬ'}
+2) либо jwt: по токену
+* Пример: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjAyMTA4OTkwLCJqdGkiOiIxZmU0ZjI4NWUzOGE0NDk0OThhMWVlYmY4YzdjMWNhOSIsInVzZXJfaWQiOjF9.u17FSnZ5y_a6FrJp5oQrscCgeACC_e05tGHLomrqbMY'
 ##### Пользователь:
-* Создать пользователя: GET {'username': 'ИМЯ', 'password': 'ПАРОЛЬ'}
+* Создать пользователя: POST {'username': 'ИМЯ', 'password': 'ПАРОЛЬ'}
 * Обновить пользователя: PUT {'user_location': {'latitude': 45.052409872249356, 'longitude': 39.03}, 'phone': '89005353535'} (больше ключей смотреть в swagger)
+* Список пользователей: GET http://127.0.0.1:8000/api/main/all-profiles/
+* Создать JWT ТОКЕН: http://127.0.0.1:8000/auth/jwt/create/ {'username': 'user', 'password': 'pass'}
 
 
 ### Общий шаблон у категорий/компаний/продуктов (на примере компаний)
