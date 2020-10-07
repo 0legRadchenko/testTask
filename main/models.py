@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 
+
 class Category(models.Model):
     title = models.CharField(verbose_name="Категория", max_length=150, unique=True)
 
@@ -11,6 +12,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
+
 
 class Company(models.Model):
     name = models.CharField('Название', max_length=100, unique=True)
@@ -25,6 +27,7 @@ class Company(models.Model):
     class Meta:
         verbose_name = "Компания"
         verbose_name_plural = "Компании"
+
 
 class Product(models.Model):
     title = models.CharField('Заголовок', max_length=150, unique=True)
