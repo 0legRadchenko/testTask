@@ -2,6 +2,8 @@
 * Помимо CRUD и базовых задач реализованы 2 дополнительных задания:
 1) Обновление/актуализация данных по cron из внешних источников (каждые 30 секунд)
 2) Возможность фильтрации списка компаний по расстоянию (в порядке относительно наименьшей близости) от текущего местоположения пользователя.
+_________________
+PS К сожалению, докер образ получился довольно громоздким ввиду того, что пакеты для GeoDjango было просто невозможно найти на alpine linux
 
 
 ## Инструкция по установке
@@ -15,13 +17,13 @@
 ##### Собираем docker-compose
 * docker-compose up --build -d
 ##### Делаем обязательные миграции
-docker exec -it spider_group_web_1 python manage.py migrate
+docker exec -it testtask_web_1 python manage.py migrate
 ##### Создаем суперпользователя (админа)
-docker exec -it spider_group_web_1 python manage.py createsuperuser
+docker exec -it testtask_web_1 python manage.py createsuperuser
 ##### Смотрим логи celery (если интересно посмотреть)
-* docker logs spider_group_celery_1
+* docker logs testtask_celery_1
 ##### Проводим тесты
-* docker exec -it spider_group_web_1 python manage.py test
+* docker exec -it testtask_web_1 python manage.py test
 ## Инструкция по эксплуатации (базовое описание - подробности смотреть в swagger)
 * Для общего представления о сервисе внедрен swagger: http://127.0.0.1:8000/swagger/
 * Для большинства запросов требуется авторизация
@@ -37,7 +39,7 @@ docker exec -it spider_group_web_1 python manage.py createsuperuser
 
 ### Общий шаблон у категорий/компаний/продуктов (на примере компаний)
 * GET http://127.0.0.1:8000/api/main/companies/
-* GET http://127.0.0.1:8000/api/main/companies/1/
+* GET http://127.0.0.1:8000/api/main/companies/1/ (так же здесь можно увидеть список всех продуктов/категорий этой компании)
 * POST http://127.0.0.1:8000/api/main/companies/ {'location': '{'latitude': 44.052409872249356, 'longitude': 39.03}', 'name': 'name', 'description': 'description'} 
 * PUT http://127.0.0.1:8000/api/main/companies/1/ {'location': '{'latitude': 44.052409872249356, 'longitude': 39.03}', 'name': 'name', 'description': 'description'}
 * DELETE http://127.0.0.1:8000/api/main/companies/1/
@@ -47,7 +49,7 @@ docker exec -it spider_group_web_1 python manage.py createsuperuser
 * Локация пользователя отправляется в виде json словаря вида: {'latitude': 44.05240, 'longitude': 39.03}
 ### Пример работы celery (получение данных из внешних api)
 * Данные обновляются каждые 30 секунд
-* Обновляются и добавляются категории, компании и продукты к ним
+* Обновляются и добавляются категории, компании и связанные с ними продукты
 
 
 
