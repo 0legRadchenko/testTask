@@ -26,6 +26,7 @@ docker exec -it testtask_web_1 python manage.py createsuperuser
 * docker exec -it testtask_web_1 python manage.py test
 ## Инструкция по эксплуатации (базовое описание - подробности смотреть в swagger)
 * Для общего представления о сервисе внедрен swagger: http://127.0.0.1:8000/swagger/
+* И ReDoc: http://127.0.0.1:8000/redoc/
 * Для большинства запросов требуется авторизация
 1) либо базовая: логин пароль {'username': 'ИМЯ', 'password': 'ПАРОЛЬ'}
 2) либо jwt: по токену
